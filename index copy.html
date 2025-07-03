@@ -237,26 +237,8 @@
           <span class="badge">🌍 Global Support</span>
         </div>
       </div>
-
-      <div style="text-align: center; margin-bottom: 32px">
-        <a
-          href="https://chrome.google.com/webstore/detail/tuneswap/PUT-YOUR-ID-HERE"
-          target="_blank"
-          style="
-            display: inline-block;
-            background: #1db954;
-            color: #fff;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 16px 32px;
-            border-radius: 12px;
-            box-shadow: 0 3px 14px rgba(29, 185, 84, 0.15);
-            text-decoration: none;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            transition: background 0.2s;
-          "
-        >
+      <div style="text-align:center; margin-bottom:32px;">
+        <a href="https://chrome.google.com/webstore/detail/tuneswap/PUT-YOUR-ID-HERE" target="_blank" style="display:inline-block; background:#1db954; color:#fff; font-weight:600; font-size:1.2rem; padding:16px 32px; border-radius:12px; box-shadow:0 3px 14px rgba(29,185,84,0.15); text-decoration:none; margin-top:10px; margin-bottom:10px; transition:background 0.2s;">
           👉 Install on Chrome (Chrome Web Store)
         </a>
       </div>
@@ -376,35 +358,6 @@
         </div>
       </div>
 
-      <div class="test-section">
-        <h3>👨‍🎤 Artists</h3>
-        <p>These should open Apple Music artist search pages:</p>
-        <div class="links-grid">
-          <a
-            href="https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d"
-            target="_blank"
-            class="spotify-link"
-          >
-            👨‍🎤 Queen
-          </a>
-          <a
-            href="https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
-            target="_blank"
-            class="spotify-link"
-          >
-            👨‍🎤 The Weeknd
-          </a>
-          <a
-            href="https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V"
-            target="_blank"
-            class="spotify-link"
-          >
-            👨‍🎤 Ed Sheeran
-          </a>
-          <a
-            href="https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
-            target="_blank"
-            class="spotify-link"
           >
             👨‍🎤 Taylor Swift
           </a>
@@ -425,73 +378,9 @@
         </div>
       </div>
 
-      <div class="test-section">
-        <h3>📱 Playlists</h3>
-        <p>Popular playlists for testing conversion logic:</p>
-        <div class="links-grid">
-          <a
-            href="https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
-            target="_blank"
-            class="spotify-link"
-          >
-            📱 Today's Top Hits
-          </a>
-          <a
-            href="https://open.spotify.com/playlist/37i9dQZF1DX0XUsuxWHRQd"
-            target="_blank"
-            class="spotify-link"
-          >
-            📱 RapCaviar
-          </a>
-          <a
-            href="https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U"
-            target="_blank"
-            class="spotify-link"
-          >
-            📱 Rock Classics
-          </a>
-          <a
-            href="https://open.spotify.com/playlist/37i9dQZF1DX4dyzvuaRJ0n"
-            target="_blank"
-            class="spotify-link"
-          >
-            📱 Mood Booster
-          </a>
-        </div>
-      </div>
-
-      <div class="test-section">
-        <h3>🧪 Edge Cases</h3>
-        <p>Test error handling and edge cases:</p>
-        <div class="links-grid">
-          <a
-            href="https://open.spotify.com/track/invalidtrackid123"
-            target="_blank"
-            class="spotify-link"
-          >
-            ❌ Invalid Track ID
-          </a>
-          <a
-            href="https://spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8"
-            target="_blank"
-            class="spotify-link"
-          >
-            🔄 Link without 'open'
-          </a>
-          <a
-            href="https://open.spotify.com/episode/invalidpodcastid"
-            target="_blank"
-            class="spotify-link"
-          >
-            🎙️ Unsupported Content Type
-          </a>
-        </div>
-      </div>
-
       <div class="footer">
         <p>
-          &copy; 2025 TuneSwap &mdash;
-          <a href="mailto:contacto@tuneswap.xyz">Contacto</a>
+          &copy; 2025 TuneSwap &mdash; <a href="mailto:contacto@tuneswap.xyz">Contacto</a>
         </p>
       </div>
     </div>
@@ -499,92 +388,249 @@
     <script>
       console.log("🎵 TuneSwap Demo Page Loaded");
 
-      // Debug logging
-      const debugInfo = document.getElementById("debugContent");
-      const originalLog = console.log;
-
-      console.log = function (...args) {
-        originalLog.apply(console, args);
-
-        // Show TuneSwap related logs in the debug section
-        const message = args.join(" ");
-        if (
-          message.includes("TuneSwap") ||
-          message.includes("Spotify") ||
-          message.includes("🎵") ||
-          message.includes("✅") ||
-          message.includes("❌")
-        ) {
-          const logEntry = document.createElement("div");
-          logEntry.style.cssText =
-            "margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 4px; font-size: 0.8rem;";
-          logEntry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
-          debugInfo.appendChild(logEntry);
-
-          // Keep only last 10 entries
-          if (debugInfo.children.length > 10) {
-            debugInfo.removeChild(debugInfo.firstChild);
-          }
-        }
-      };
-
-      // Check if TuneSwap extension is loaded
-      function checkExtensionStatus() {
-        const statusEl = document.getElementById("extensionStatus");
-        const spotifyLinks = document.querySelectorAll(
-          'a[href*="spotify.com"]'
-        );
-
-        console.log(
-          `🔍 Found ${spotifyLinks.length} Spotify links on this page`
-        );
-
-        // Listen for TuneSwap extension messages
-        window.addEventListener("message", function (event) {
-          if (event.data && event.data.type === "TUNESWAP_ACTIVE") {
-            statusEl.className = "status-indicator";
-            statusEl.innerHTML = `
-                        <strong>✅ TuneSwap Extension Active!</strong>
-                        <p>Extension is loaded and ready to convert Spotify links.</p>
-                    `;
-          }
-        });
-
-        // Check for extension after a delay
-        setTimeout(() => {
-          if (statusEl.innerHTML.includes("Checking")) {
-            statusEl.className = "status-indicator error";
-            statusEl.innerHTML = `
-                        <strong>⚠️ TuneSwap Extension Not Detected</strong>
-                        <p>Make sure the extension is installed and enabled in <code>chrome://extensions</code></p>
-                    `;
-          }
-        }, 3000);
-      }
-
       // Track clicks on Spotify links
       document.addEventListener("click", function (e) {
         if (e.target.href && e.target.href.includes("spotify.com")) {
           console.log("🎵 Spotify link clicked:", e.target.href);
-          console.log("🔄 TuneSwap should intercept this click...");
-
-          const debugEntry = document.createElement("div");
-          debugEntry.style.cssText =
-            "margin: 10px 0; padding: 10px; background: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 4px;";
-          debugEntry.innerHTML = `
-                    <strong>🎯 Link Clicked:</strong><br>
-                    <code>${e.target.href}</code><br>
-                    <small>Waiting for TuneSwap conversion...</small>
-                `;
-          debugInfo.appendChild(debugEntry);
         }
       });
 
-      // Initialize
+      // Check if TuneSwap extension is loaded
+      function checkExtensionStatus() {
+        if (window.TuneSwapAnalytics) {
+          document.getElementById("extensionStatus").innerHTML =
+            '<strong>✅ TuneSwap Extension Detected!</strong><p>You can now test link conversion below.</p>';
+        } else {
+          setTimeout(checkExtensionStatus, 1200);
+        }
+      }
       checkExtensionStatus();
-
-      // Dispatch event to let extension know this is a test page
-      window.postMessage({ type: "TUNESWAP_TEST_PAGE" }, "*");
     </script>
   </body>
+</html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TuneSwap - Demo & Test Page</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 361 361'><circle cx='180' cy='180' r='180' fill='%231DB954'/><text y='200' font-size='180' text-anchor='middle' x='180'>🎵</text></svg>" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.primary {
+            background: #1DB954;
+            border-color: #1DB954;
+        }
+        
+        .btn.primary:hover {
+            background: #1aa34a;
+        }
+        
+        section {
+            margin: 50px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        ol {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.15rem;
+        }
+        
+        .test-section {
+            margin: 0 auto;
+            max-width: 700px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .links-grid a {
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .links-grid a:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.95rem;
+            margin: 60px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="tuneswap.svg" alt="TuneSwap Logo" class="logo" />
+            <h1>TuneSwap</h1>
+            <p>Convierte enlaces de Spotify a Apple Music de forma automática.<br>Extensión gratuita para Google Chrome.</p>
+            <div style="margin: 30px 0;">
+                <a href="https://chrome.google.com/webstore/detail/tuneswap/" class="btn primary" style="font-size:1.2rem;">➕ Instalar en Chrome</a>
+                <a href="dashboard.html" class="btn" style="margin-left:15px;">📊 Ver Dashboard</a>
+            </button>
+            <button class="btn" onclick="exportData()">
+                📊 Export CSV
+            </button>
+            <button class="btn" onclick="toggleAutoRefresh()">
+                ⏱️ <span id="autoRefreshText">Enable Auto-refresh</span>
+            </button>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <h3>Loading analytics data...</h3>
+            <p>Connecting to TuneSwap backend...</p>
+        </div>
+        
+        <div id="error" class="error" style="display: none;">
+            <strong>⚠️ Connection Error</strong><br>
+            <span id="error-message"></span><br>
+            <small>Make sure the backend server is running</small>
+        </div>
+        
+        <div id="dashboard-content" style="display: none;">
+            <!-- Server Status -->
+            <div class="chart-container">
+                <div class="chart-title">
+                    <span id="server-status" class="status-indicator status-offline"></span>
+                    Server Status: <span id="status-text">Checking...</span>
+                </div>
+            </div>
+            
+            <!-- Overall Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-users">-</div>
+                    <div class="stat-label">Total Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-conversions">-</div>
+                    <div class="stat-label">Total Conversions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="daily-conversions">-</div>
+                    <div class="stat-label">Today's Conversions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="success-rate">-</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+            
+            <!-- Top Content -->
+            <div class="content-grid">
+                <div class="chart-container">
+                    <div class="chart-title">🎵 Top Converted Songs</div>
+                    <div id="top-songs-list">
+                        <div class="empty-state">
+                            <h3>No conversions yet</h3>
+                            <p>Songs will appear here once users start converting Spotify links</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-title">🌐 Top Source Websites</div>
+                    <div id="top-websites-list">
+                        <div class="empty-state">
+                            <h3>No page visits yet</h3>
+                            <p>Websites will appear here once users visit pages with Spotify links</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Real-time Activity -->
+            <div class="chart-container">
+                <div class="chart-title">⚡ Recent Activity</div>
+                <div id="realtime-activity">
+                    <div class="empty-state">
+                        <h3>No recent activity</h3>
+                        <p>Recent conversions will appear here in real-time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="last-updated" id="last-updated" style="display: none;">
+            Last updated: <span id="update-time">-</span>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
 </html>
