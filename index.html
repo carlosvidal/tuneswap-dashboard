@@ -522,7 +522,7 @@
           if (debugInfo) debugInfo.appendChild(logEntry);
 
           // Keep only last 10 entries
-          if (debugInfo.children.length > 10) {
+          if (debugInfo && debugInfo.children && debugInfo.children.length > 10) {
             debugInfo.removeChild(debugInfo.firstChild);
           }
         }
