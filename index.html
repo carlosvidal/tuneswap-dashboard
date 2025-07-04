@@ -519,7 +519,9 @@
           logEntry.style.cssText =
             "margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 4px; font-size: 0.8rem;";
           logEntry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
-          if (debugInfo) debugInfo.appendChild(logEntry);
+          if (debugInfo) {
+  debugInfo.appendChild(logEntry);
+}
 
           // Keep only last 10 entries
           if (debugInfo && debugInfo.children && debugInfo.children.length > 10) {
@@ -576,7 +578,9 @@
                     <code>${e.target.href}</code><br>
                     <small>Waiting for TuneSwap conversion...</small>
                 `;
-          debugInfo.appendChild(debugEntry);
+          if (debugInfo) {
+  debugInfo.appendChild(debugEntry);
+}
         }
       });
 
