@@ -519,7 +519,7 @@
           logEntry.style.cssText =
             "margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 4px; font-size: 0.8rem;";
           logEntry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
-          debugInfo.appendChild(logEntry);
+          if (debugInfo) debugInfo.appendChild(logEntry);
 
           // Keep only last 10 entries
           if (debugInfo.children.length > 10) {
