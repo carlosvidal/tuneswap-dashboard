@@ -1,14 +1,398 @@
-<!-- dashboard.html: antiguo index.html del dashboard -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TuneSwap Dashboard</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>TuneSwap Analytics Dashboard</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .dashboard {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+        backdrop-filter: blur(10px);
+      }
+
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .btn.primary {
+        background: #1db954;
+        border-color: #1db954;
+      }
+
+      .btn.primary:hover {
+        background: #1aa34a;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1db954;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .chart-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 30px;
+      }
+
+      .chart-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: background 0.3s;
+      }
+
+      .list-item:hover {
+        background: #e9ecef;
+      }
+
+      .list-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .song-info {
+        flex: 1;
+      }
+
+      .song-title {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .song-artist {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .conversion-count {
+        background: #1db954;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .website {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .category {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-left: 10px;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: white;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .error {
+        background: rgba(255, 69, 58, 0.9);
+        border: 1px solid #ff453a;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+
+      .empty-state h3 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .status-online {
+        background: #34c759;
+      }
+
+      .status-offline {
+        background: #ff3b30;
+      }
+
+      .last-updated {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .dashboard {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- El contenido existente de index.html será movido aquí automáticamente -->
+    <div class="dashboard">
+      <div class="header">
+        <h1>🎵 TuneSwap Analytics</h1>
+        <p>Real-time usage statistics and insights</p>
+      </div>
+
+      <div class="controls">
+        <button class="btn primary" onclick="loadAnalytics()">
+          🔄 Refresh Data
+        </button>
+        <button class="btn" onclick="exportData()">📊 Export CSV</button>
+        <button class="btn" onclick="toggleAutoRefresh()">
+          ⏱️ <span id="autoRefreshText">Enable Auto-refresh</span>
+        </button>
+      </div>
+
+      <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <h3>Loading analytics data...</h3>
+        <p>Connecting to TuneSwap backend...</p>
+      </div>
+
+      <div id="error" class="error" style="display: none">
+        <strong>⚠️ Connection Error</strong><br />
+        <span id="error-message"></span><br />
+        <small>Make sure the backend server is running</small>
+      </div>
+
+      <div id="dashboard-content" style="display: none">
+        <!-- Server Status -->
+        <div class="chart-container">
+          <div class="chart-title">
+            <span
+              id="server-status"
+              class="status-indicator status-offline"
+            ></span>
+            Server Status: <span id="status-text">Checking...</span>
+          </div>
+        </div>
+
+        <!-- Overall Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="total-users">-</div>
+            <div class="stat-label">Total Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="total-conversions">-</div>
+            <div class="stat-label">Total Conversions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="daily-conversions">-</div>
+            <div class="stat-label">Today's Conversions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="success-rate">-</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+        </div>
+
+        <!-- Top Content -->
+        <div class="content-grid">
+          <div class="chart-container">
+            <div class="chart-title">🎵 Top Converted Songs</div>
+            <div id="top-songs-list">
+              <div class="empty-state">
+                <h3>No conversions yet</h3>
+                <p>
+                  Songs will appear here once users start converting Spotify
+                  links
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-title">🌐 Top Source Websites</div>
+            <div id="top-websites-list">
+              <div class="empty-state">
+                <h3>No page visits yet</h3>
+                <p>
+                  Websites will appear here once users visit pages with Spotify
+                  links
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time Activity -->
+        <div class="chart-container">
+          <div class="chart-title">⚡ Recent Activity</div>
+          <div id="realtime-activity">
+            <div class="empty-state">
+              <h3>No recent activity</h3>
+              <p>Recent conversions will appear here in real-time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="last-updated" id="last-updated" style="display: none">
+        Last updated: <span id="update-time">-</span>
+      </div>
+    </div>
+
     <script src="dashboard.js"></script>
   </body>
 </html>
